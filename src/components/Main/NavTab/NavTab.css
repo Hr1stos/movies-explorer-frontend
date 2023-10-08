@@ -1,4 +1,6 @@
 .navtab {
+	width: 100%;
+	background-color: #272727;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
@@ -22,6 +24,10 @@
 }
 
 @media (max-width: 350px) {
+	.navtab {
+		gap: 24px;
+	}
+
 	.navtab__link {
 		font-size: 11px;
 		line-height: 16px;

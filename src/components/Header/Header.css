@@ -57,4 +57,12 @@
 	.header__container {
 		margin: 0 14px;
 	}
+
+	.header__nav-item{
+		font-size: 10px;
+	}
+	
+	.header__nav-link {
+		
+	}
 }
