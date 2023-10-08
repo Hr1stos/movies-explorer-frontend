@@ -19,7 +19,8 @@
 
 .link {
 	text-decoration: none;
-	color: inherit;
+	color: #FFFFFF;
+	transition: opacity .3s ease;
 }
 
 .link:hover {
