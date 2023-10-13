@@ -1,7 +1,6 @@
 .promo {
 	width: 100%;
 	background-color: #073042;
-	min-height: 524px;
 	display: flex;
 	justify-content: center;
 	position: relative;
@@ -13,7 +12,7 @@
 	line-height: 58px;
 	max-width: 730px;
 	text-align: center;
-	margin: 184px 0 0;
+	margin: 184px 0 224px;
 	z-index: 1;
 	letter-spacing: -0.04em;
 }
@@ -27,25 +26,17 @@
 }
 
 @media screen and (max-width: 768px) {
-	.promo {
-		min-height: 784px;
-	}
-
 	.promo__logo {
 		top: 224px;
 	}
 
 	.promo__title {
-		margin: 326px 0 0;
+		margin: 326px 0 342px;
 	}
 
 }
 
 @media screen and (max-width: 475px) {
-	.promo {
-		min-height: 570px;
-	}
-
 	.promo__logo {
 		top: 142px;
 		width: 248px;
@@ -53,7 +44,7 @@
 	}
 
 	.promo__title {
-		margin: 207px 0 0;
+		margin: 207px 0 246px;
 		font-size: 31px;
 		line-height: 39px;
 		letter-spacing: -1.24px;

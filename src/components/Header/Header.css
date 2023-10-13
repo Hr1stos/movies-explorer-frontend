@@ -58,11 +58,15 @@
 		margin: 0 14px;
 	}
 
-	.header__nav-item{
+	.header__nav-list {
+		gap: 14px;
+	}
+
+	.header__nav-item {
 		font-size: 10px;
 	}
-	
-	.header__nav-link {
-		
+
+	.header__nav-item:last-child {
+		padding: 5px 12px;
 	}
 }

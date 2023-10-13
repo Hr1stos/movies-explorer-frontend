@@ -33,7 +33,7 @@
 	grid-template-columns: 228px auto;
 	grid-template-rows: 36px;
 	grid-template-areas:
-		"timeline__title_backend timeline__title_frontend"
+		"backend frontend"
 		"timeline__signature_backend timeline__signature_frontend";
 }
 
@@ -51,10 +51,12 @@
 .timeline__title_backend {
 	color: #000000;
 	background: #3DDC84;
+	grid-area: backend;
 }
 
 .timeline__title_frontend {
 	background: #303030;
+	grid-area: frontend;
 }
 
 .timeline__signature {
