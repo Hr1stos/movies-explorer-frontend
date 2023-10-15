@@ -1,5 +1,5 @@
-import './Promo.css'
-import promo from '../../../images/promo.svg'
+import './Promo.css';
+import promo from '../../../images/promo.svg';
 
 const Promo = () => {
 	return (

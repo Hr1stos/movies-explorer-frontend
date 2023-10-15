@@ -1,6 +1,7 @@
 import './App.css';
-import Header from '../Header/Header'
-import Main from '../Main/Main'
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 const App = () => {
 	return (
@@ -8,6 +9,7 @@ const App = () => {
 			<div className="page__container">
 				<Header></Header>
 				<Main></Main>
+				<Footer></Footer>
 			</div>
 		</div>
 	)

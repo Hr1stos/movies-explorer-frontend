@@ -39,6 +39,7 @@
 
 .portfolio__item:last-child {
 	border-bottom: none;
+	padding: 0;
 }
 
 .portfolio__name {

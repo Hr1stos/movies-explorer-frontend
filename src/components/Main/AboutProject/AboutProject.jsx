@@ -1,4 +1,4 @@
-import './AboutProject.css'
+import './AboutProject.css';
 import SectionTitle from "../SectionTitle/SectionTitle";
 
 const AboutProject = () => {
