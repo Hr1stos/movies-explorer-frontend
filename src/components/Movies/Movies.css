@@ -5,14 +5,14 @@
 	align-items: center;
 }
 
-.movies__button-wrapper {
+.button-wrapper {
 	margin: 67px 70px 90px;
 	width: 100%;
 	max-width: 1140px;
 }
 
 
-.movies__button-load {
+.button-load {
 	min-width: 100%;
 	min-height: 36px;
 	border-radius: 6px;
@@ -25,14 +25,14 @@
 }
 
 @media (max-width: 769px) {
-	.movies__button-wrapper {
+	.button-wrapper {
 		margin: 63px 70px 92px;
 		max-width: 708px;
 	}
 }
 
 @media (max-width: 420px) {
-	.movies__button-wrapper {
+	.button-wrapper {
 		margin: 64px 70px 78px;
 		max-width: 300px;
 	}

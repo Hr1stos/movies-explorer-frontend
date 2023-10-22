@@ -82,9 +82,9 @@ const Movies = () => {
 					duration="1ч 7м"
 				/>
 			</MoviesCardList>
-			<div className="movies__button-wrapper">
+			<div className="button-wrapper">
 				<button
-					className="movies__button-load button"
+					className="button-load button"
 					type='button'
 				>
 					Ещё

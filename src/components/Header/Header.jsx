@@ -1,38 +1,32 @@
 import './Header.css';
-//import Navigation from '../Navigation/Navigation';
-import { Link } from 'react-router-dom';
+import Navigation from '../Navigation/Navigation';
+import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
+	const location = useLocation().pathname;
+
+	const headerEndpoints = (
+		location === "/movies" ||
+		location === "/saved-movies" ||
+		location === "/profile"
+);
+
 	return (
-		<header className='header'>
+		<header className={`header ${headerEndpoints ? "header_color_black" : ""}`}>
 			<div className="header__container">
-				<Link to='/'
+				<NavLink
+					to='/'
 					className='header__logo link'
 				>
 					<img
 						src={logo}
 						alt="Логотип"
 					/>
-				</Link>
-				<ul className='header__nav-list'>
-					<li className='header__nav-item'>
-						<Link
-							to='/signup'
-							className='link'
-						>
-							Регистрация
-						</Link>
-					</li>
-					<li className='header__nav-item link'>
-						<Link
-							to='/signin'
-							className='header__nav-link'
-						>
-							Войти
-						</Link>
-					</li>
-				</ul>
+				</NavLink>
+				<Navigation
+					loggedIn={loggedIn}
+				/>
 			</div>
 		</header>
 	)
