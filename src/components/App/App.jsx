@@ -62,7 +62,10 @@ const App = () => {
 							path="/profile"
 							element={<Profile setLoggedIn={setLoggedIn} />}
 						/>
-						<Route path="*" element={<PageNotFound />} />
+						<Route
+							path="*"
+							element={<PageNotFound />}
+						/>
 					</Routes>
 					{footerEndpoints &&
 						<Footer

@@ -49,7 +49,7 @@
 }
 
 @media (max-width: 420px) {
-	.input__label {
+	.input {
 		min-width: 260px;
 	}
 }
