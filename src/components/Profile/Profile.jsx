@@ -1,28 +1,48 @@
 import './Profile.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useFormValidator } from "../../hooks/useFormValidator";
 import CurrentUserContext from '../contexts/CurrentUserContext';
-import { useNavigate } from 'react-router-dom';
 
-const Profile = ({ setLoggedIn }) => {
-	const currentUser = useContext(CurrentUserContext);
+
+const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, isDisabledInput }) => {
+	const [isVisible, setIsVisible] = useState(false);
+	const [isDisable, setIsDisabled] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+
+	const { name, email } = useContext(CurrentUserContext);
 	const { values, errors, isFormValid, handleChange } = useFormValidator();
-	const navigate = useNavigate();
 
-	const handleLogout = () => {
-		setLoggedIn(false);
-		navigate('/')
-	};
+	useEffect(() => {
+		if (name !== values.name || email !== values.email) {
+			setIsDisabled(true)
+		} else {
+			setIsDisabled(false)
+		}
+	}, [email, name, values.email, values.name])
+
+	const changeVisibility = () => {
+		setIsVisible(true);
+		setSubmitMessage('')
+	}
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
+		handleUpdateUser({
+			name: values.name,
+			email: values.email,
+		})
+		setIsEditing(true)
+		setTimeout(() => {
+			setIsVisible(false)
+			setIsEditing(false)
+		}, 4000)
 	}
 
 	return (
 		<main className="content">
 			<section className="profile">
 				<h1 className="profile__name">
-					{`Привет, ${currentUser.name || ''}!`}
+					{`Привет, ${name || ''}!`}
 				</h1>
 				<form
 					className="profile__form form"
@@ -37,10 +57,10 @@ const Profile = ({ setLoggedIn }) => {
 							type="text"
 							name="name"
 							onChange={handleChange}
-							minLength="2"
-							maxLength="30"
+							pattern="[\-a-zA-Zа-яёА-ЯЁ ]{2,30}"
 							required
 							value={values.name || ''}
+							disabled={(isVisible ? false : true) || isDisabledInput || isEditing}
 						/>
 						<span className="profile__input-error">
 							{errors.name}
@@ -53,33 +73,47 @@ const Profile = ({ setLoggedIn }) => {
 							type="email"
 							name="email"
 							onChange={handleChange}
+							pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
 							required
 							value={values.email || ''}
+							disabled={(isVisible ? false : true) || isDisabledInput || isEditing}
 						/>
 						<span className="profile__input-error">
 							{errors.email || ''}
 						</span>
 					</label>
 					<div className="profile__button-wrapper">
-						<span className="profile__error">
-							При обновлении профиля произошла ошибка.
-						</span>
-						<button
-							className={`profile__button-edit button ${!isFormValid ? 'profile__button-edit_disabled' : ''}`}
-							type="submit"
-							disabled={!isFormValid}
-						>
-							Редактировать
-						</button>
+						{isVisible ? (
+							<>
+								<span className='profile__error'>
+									{submitMessage}
+								</span>
+								<button
+									className={`profile__button-save button ${!isFormValid || !isDisable ? 'profile__button-save_disabled' : ''} `}
+									type="submit"
+									onClick={changeVisibility}
+									disabled={!isFormValid || !isDisable}
+								>
+									Сохранить
+								</button>
+							</>) : (<>
+								<button
+									className={`profile__button-edit button ${!isFormValid || !isDisable ? 'profile__button-edit_disabled' : ''}`}
+									type="submit"
+									onClick={changeVisibility}
+								>
+									Редактировать
+								</button>
+								<button
+									className="profile__button-exit button"
+									type="button"
+									onClick={onExit}
+								>
+									Выйти из аккаунта
+								</button>
+							</>)}
 					</div>
 				</form>
-				<button
-					className="profile__button-exit button"
-					type="button"
-					onClick={handleLogout}
-				>
-					Выйти из аккаунта
-				</button>
 			</section>
 		</main>
 	);

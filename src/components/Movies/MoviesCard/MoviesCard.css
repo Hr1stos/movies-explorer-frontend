@@ -8,6 +8,8 @@
 
 .card__image {
 	width: 100%;
+	object-fit: contain;
+	aspect-ratio: 1.8 / 1;
 	display: block;
 	border-radius: 6px 6px 0 0;
 }
@@ -29,18 +31,26 @@
 	text-overflow: ellipsis;
 }
 
-.card__button-like {
+.card__btn {
 	width: 30px;
 	height: 30px;
-	background-image: url('../../../images/heart.svg');
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 14px, 12px;
 }
 
+.card__button-like {
+	background-image: url('../../../images/heart.svg');
+}
+
 .card__button-like_active {
 	background-image: url('../../../images/heart-active.svg');
+}
+
+.card__button-remove {
+	background-image: url('../../../images/remove.svg');
+	background-size: 8px;
 }
 
 .card__duration {

@@ -5,7 +5,7 @@ height: 266px;
 	gap: 20px;
 }
 
-/*.login__error {
+.login__error {
 	font-weight: 400;
 	font-size: 11px;
 	line-height: 13px;
@@ -13,4 +13,4 @@ height: 266px;
 	text-align: center;
 	margin: 36px 0 33px;
 	height: 0;
-}*/
+}
