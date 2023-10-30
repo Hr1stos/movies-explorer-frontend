@@ -12,4 +12,4 @@ IP 158.160.115.46
 
 [Backend](https://api.movies.hr1stos.nomoredomainsrocks.ru)
 
-[Pull-request](https://github.com/Hr1stos/movies-explorer-frontend/pull/2)
+[Pull-request](https://github.com/Hr1stos/movies-explorer-frontend/compare/main...level-3)
