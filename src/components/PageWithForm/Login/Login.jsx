@@ -5,11 +5,12 @@ import PageWithForm from '../PageWithForm';
 import { useFormValidator } from "../../../hooks/useFormValidator";
 
 const Login = ({ onLogin, isServerError, isDisabledInput }) => {
-	const { values, errors, isFormValid, handleChange } = useFormValidator();
+	const { values, errors, isFormValid, handleChange, resetForm } = useFormValidator();
 
 	const onSubmit = (evt) => {
 		evt.preventDefault();
 		onLogin(values.email, values.password);
+		resetForm()
 	};
 
 	return (

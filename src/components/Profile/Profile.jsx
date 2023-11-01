@@ -10,7 +10,7 @@ const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, i
 	const [isEditing, setIsEditing] = useState(false);
 
 	const { name, email } = useContext(CurrentUserContext);
-	const { values, errors, isFormValid, handleChange, setValues } = useFormValidator();
+	const { values, errors, isFormValid, handleChange, setValues, resetForm } = useFormValidator();
 
 	useEffect(() => {
 		setValues({
@@ -43,6 +43,7 @@ const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, i
 			setIsVisible(false)
 			setIsEditing(false)
 		}, 4000)
+		resetForm()
 	}
 
 	return (

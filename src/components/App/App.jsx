@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Header from '../Header/Header';
@@ -214,22 +214,23 @@ const App = () => {
 									onDeleteMovie={handleDeleteMovie}
 								/>}
 						/>
-						<Route
-							path="/signup"
-							element={<Register
+						<Route path="/signup" element={loggedIn ?
+							<Navigate to="/movies" replace /> :
+							<Register
 								onRegister={onRegister}
 								isServerError={isServerError}
 								isDisabledInput={isDisabledInput}
-							/>}
-						/>
-						<Route
-							path="/signin"
-							element={<Login
+							/>
+						} />
+
+						<Route path="/signin" element={loggedIn ?
+							<Navigate to="/movies" replace /> :
+							<Login
 								onLogin={onLogin}
 								isServerError={isServerError}
 								isDisabledInput={isDisabledInput}
-							/>}
-						/>
+							/>
+						} />
 						<Route
 							path="/profile"
 							element={
