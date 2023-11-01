@@ -1,7 +1,7 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import { useEffect, useState } from 'react';
-import { filterByDuration, filterMovies } from '../../../hooks/MoviesFilter';
+import { filterByDuration, filterMovies } from '../../../utils/MoviesFilter';
 
 
 const SavedMovies = ({ savedMovies, onDeleteMovie }) => {

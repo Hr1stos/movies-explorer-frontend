@@ -10,7 +10,14 @@ const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, i
 	const [isEditing, setIsEditing] = useState(false);
 
 	const { name, email } = useContext(CurrentUserContext);
-	const { values, errors, isFormValid, handleChange } = useFormValidator();
+	const { values, errors, isFormValid, handleChange, setValues } = useFormValidator();
+
+	useEffect(() => {
+		setValues({
+			name: name,
+			email: email,
+		})
+	}, [email, name, setValues]);
 
 	useEffect(() => {
 		if (name !== values.name || email !== values.email) {
@@ -57,7 +64,8 @@ const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, i
 							type="text"
 							name="name"
 							onChange={handleChange}
-							pattern="[\-a-zA-Zа-яёА-ЯЁ ]{2,30}"
+							minLength="2"
+							maxLength="30"
 							required
 							value={values.name || ''}
 							disabled={(isVisible ? false : true) || isDisabledInput || isEditing}
@@ -73,7 +81,7 @@ const Profile = ({ onExit, setSubmitMessage, submitMessage,  handleUpdateUser, i
 							type="email"
 							name="email"
 							onChange={handleChange}
-							pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+							pattern="^\S+@\S+\.\S+$"
 							required
 							value={values.email || ''}
 							disabled={(isVisible ? false : true) || isDisabledInput || isEditing}

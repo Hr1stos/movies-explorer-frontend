@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Preloader from '../../Preloader/Preloader';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import NoResultMessage from '../NoResultMessage/NoResultMessage';
 import {
+	NOTHING_FOUND,
+	SERVER_ERROR,
 	MOVIES_ADD_DESKTOP,
 	MOVIES_ADD_MOBILE,
 	SCREEN_SIZE_DESKTOP,
@@ -15,22 +18,18 @@ import {
 	SHOW_MOVIES_TABLET
 } from '../../../utils/Constants';
 
-const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDeleteMovie, isSavedFilms, isNotFound, isLoading, isSearching }) => {
+const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDeleteMovie, isSavedFilms, isNotFound, isResultStatus, isLoading, isSearching }) => {
 	const location = useLocation().pathname;
 	const [shownMoviesQuantity, setShownMoviesQuantity] = useState(0);
-	const [numberMoviesToAdd, setNumberMoviesToAdd] = useState(0);
 
 	const setRenderAmount = () => {
 		const display = window.innerWidth;
 		if (display > SCREEN_SIZE_DESKTOP) {
 			setShownMoviesQuantity(SHOW_MOVIES_DESKTOP);
-			setNumberMoviesToAdd(0)
 		} else if (display > SCREEN_SIZE_TABLET_MIN && display < SCREEN_SIZE_TABLET_MAX) {
 			setShownMoviesQuantity(SHOW_MOVIES_TABLET);
-			setNumberMoviesToAdd(0)
 		} else if (display < SCREEN_SIZE_MOBILE) {
 			setShownMoviesQuantity(SHOW_MOVIES_MOBILE);
-			setNumberMoviesToAdd(0)
 		}
 	}
 
@@ -50,18 +49,18 @@ const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDelete
 	const loadMoreMovies = () => {
 		const display = window.innerWidth;
 		if (display > SCREEN_SIZE_DESKTOP) {
-			setNumberMoviesToAdd(numberMoviesToAdd + MOVIES_ADD_DESKTOP);
+			setShownMoviesQuantity(shownMoviesQuantity + MOVIES_ADD_DESKTOP);
 		} else if (display > SCREEN_SIZE_TABLET_MIN && display < SCREEN_SIZE_TABLET_MAX) {
-			setNumberMoviesToAdd(numberMoviesToAdd + MOVIES_ADD_MOBILE);
+			setShownMoviesQuantity(shownMoviesQuantity + MOVIES_ADD_MOBILE);
 		} else if (display < SCREEN_SIZE_MOBILE) {
-			setNumberMoviesToAdd(numberMoviesToAdd + MOVIES_ADD_MOBILE);
+			setShownMoviesQuantity(shownMoviesQuantity + MOVIES_ADD_MOBILE);
 		}
 	}
 
 	return (
 		<section className="cards">
 			{isLoading && <Preloader />}
-			{!isLoading && !isNotFound && (
+			{!isLoading && !isResultStatus && !isNotFound && (
 				<>
 					{location === '/saved-movies' ? (
 						<>
@@ -83,7 +82,7 @@ const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDelete
 					) : (
 						<>
 							<ul className='cards__list'>
-									{filteredMoviesList.slice(0, shownMoviesQuantity + numberMoviesToAdd).map(movie => {
+									{filteredMoviesList.slice(0, shownMoviesQuantity).map(movie => {
 									return (
 										<MoviesCard
 											movie={movie}
@@ -97,7 +96,7 @@ const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDelete
 								})}
 							</ul>
 							<div className="button-wrapper">
-									{filteredMoviesList.length > numberMoviesToAdd ? (
+									{filteredMoviesList.length > shownMoviesQuantity ? (
 									<button
 										className="button-load button"
 										type='button'
@@ -111,6 +110,12 @@ const MoviesCardList = ({ filteredMoviesList, savedMovies, onSaveMovie, onDelete
 					)}
 				</>
 			)}
+			{isNotFound && !isLoading &&
+				<NoResultMessage message={NOTHING_FOUND}
+			/>}
+			{isResultStatus && !isLoading &&
+				<NoResultMessage message={SERVER_ERROR}
+			/>}
 		</section>
 	);
 }

@@ -1,4 +1,5 @@
 const BASE_URL = 'https://api.movies.hr1stos.nomoredomainsrocks.ru';
+
 const MOVIES_API_IMG_URL = "https://api.nomoreparties.co";
 const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
@@ -6,6 +7,8 @@ const PROFILE_UPDATE_ERROR = 'При обновлении профиля про�
 const PROFILE_UPDATE_COMPLETED = 'Данные успешно обновлены.';
 const EMPTY_REQUEST = 'Введите критерий для поиска';
 const MOVIE_TITLE = 'Фильм';
+const NOTHING_FOUND = 'Ничего не найдено.';
+const SERVER_ERROR = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.';
 
 const SHORT_FILM_MIN = 40;
 
@@ -27,6 +30,8 @@ export {
 	PROFILE_UPDATE_COMPLETED,
 	EMPTY_REQUEST,
 	MOVIE_TITLE,
+	NOTHING_FOUND,
+	SERVER_ERROR,
 	SHORT_FILM_MIN,
 	SCREEN_SIZE_DESKTOP,
 	SCREEN_SIZE_TABLET_MAX,

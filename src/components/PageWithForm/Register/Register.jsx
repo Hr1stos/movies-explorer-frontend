@@ -41,6 +41,7 @@ const Register = ({ onRegister, isServerError, isDisabledInput }) => {
 						type="email"
 						title="E-mail"
 						value={values.email || ''}
+						pattern="^\S+@\S+\.\S+$"
 						onChange={handleChange}
 						required={true}
 						minLength="2"

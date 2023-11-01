@@ -1,4 +1,4 @@
-import { SHORT_FILM_MIN } from "../utils/Constants";
+import { SHORT_FILM_MIN } from "./Constants";
 
 export function filterMovies(movies, query) {
 	const moviesByQuery = movies.filter((movie) => {

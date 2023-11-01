@@ -52,11 +52,6 @@ const App = () => {
 			})
 	}, [loggedIn])
 
-
-	useEffect(() => {
-		handleTokenCheck();
-	}, [])
-
 	const handleTokenCheck = () => {
 		const token = localStorage.getItem('token');
 		if (!token) {
@@ -68,7 +63,7 @@ const App = () => {
 				if (data) {
 					setCurrentUser(data);
 					setLoggedIn(true);
-					navigate('/movies');
+					navigate(location);
 				}
 			})
 			.catch((err) => {
@@ -76,6 +71,10 @@ const App = () => {
 				onExit();
 			});
 	};
+
+	useEffect(() => {
+		handleTokenCheck();
+	}, [])
 
 	const onExit = () => {
 		localStorage.clear();

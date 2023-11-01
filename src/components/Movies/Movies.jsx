@@ -1,6 +1,6 @@
 import './Movies.css';
 import { useEffect, useState } from 'react';
-import { filterByDuration, filterMovies } from "../../hooks/MoviesFilter";
+import { filterByDuration, filterMovies } from "../../utils/MoviesFilter";
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import * as moviesApi from '../../utils/MoviesApi'
@@ -12,6 +12,7 @@ const Movies = ({ savedMovies, onSaveMovie, onDeleteMovie }) => {
 	const [isCheckboxActive, setIsCheckboxActive] = useState(false);
 	const [isNotFound, setIsNotFound] = useState(false);
 	const [isSearching, setIsSearching] = useState(false);
+	const [isResultStatus, setResultStatus] = useState(false);
 
 	const getFilterMovies = (movies, searchQuery, isCheckbox) => {
 		const findedFilms = filterMovies(movies, searchQuery, isCheckbox);
@@ -48,8 +49,10 @@ const Movies = ({ savedMovies, onSaveMovie, onDeleteMovie }) => {
 				.getMovies()
 				.then((dataCards) => {
 					getFilterMovies(dataCards, searchRequest, isCheckboxActive);
+					setResultStatus(false)
 				})
 				.catch((err) => {
+					setResultStatus(true)
 					console.log(err);
 				})
 				.finally(() => {
@@ -104,6 +107,7 @@ const Movies = ({ savedMovies, onSaveMovie, onDeleteMovie }) => {
 				filteredMoviesList={filteredMoviesList}
 				isSavedFilms={false}
 				isNotFound={isNotFound}
+				isResultStatus={isResultStatus}
 				isLoading={isLoading}
 				isSearching={isSearching}
 			/>

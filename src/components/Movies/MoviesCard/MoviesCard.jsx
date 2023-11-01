@@ -14,10 +14,11 @@ const MoviesCard = ({ movie, isSavedFilms, onSaveMovie, onDeleteMovie, savedMovi
 	const handleSaveMovie = () => {
 		if (isLiked) {
 			onDeleteMovie(movie);
+			setIsLiked(!isLiked)
 		} else {
 			onSaveMovie(movie);
+			setIsLiked(isLiked)
 		}
-		setIsLiked(!isLiked);
 	};
 
 	const handleDeleteMovie = () => {
