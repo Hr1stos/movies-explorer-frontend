@@ -4,8 +4,14 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import PageWithForm from '../PageWithForm';
 import { useFormValidator } from "../../../hooks/useFormValidator";
 
-const Register = () => {
-	const { values, errors, isFormValid, handleChange } = useFormValidator();
+const Register = ({ onRegister, isServerError, isDisabledInput }) => {
+	const { values, errors, isFormValid, handleChange, resetForm } = useFormValidator();
+
+	const onSubmit = (evt) => {
+		evt.preventDefault();
+		onRegister(values.name, values.email, values.password);
+		resetForm()
+	};
 
 	return (
 		<main className="content">
@@ -15,6 +21,7 @@ const Register = () => {
 				question="Уже зарегистрированы?"
 				link="/signin"
 				linkTitle="Войти"
+				onSubmit={onSubmit}
 			>
 				<div className="register">
 					<Input
@@ -28,17 +35,20 @@ const Register = () => {
 						maxLength="30"
 						placeholder="Имя"
 						validationMessage={errors.name}
+						disabled={isDisabledInput}
 					/>
 					<Input
 						name="email"
 						type="email"
 						title="E-mail"
 						value={values.email || ''}
+						pattern="^\S+@\S+\.\S+$"
 						onChange={handleChange}
 						required={true}
 						minLength="2"
 						placeholder="E-mail"
 						validationMessage={errors.email}
+						disabled={isDisabledInput}
 					/>
 					<Input
 						name="password"
@@ -51,11 +61,12 @@ const Register = () => {
 						maxLength="30"
 						placeholder="Введите пароль"
 						validationMessage={errors.password}
+						disabled={isDisabledInput}
 					/>
 				</div>
-				{/*<span className="register__error">
-					Пользователь с таким email уже зарегистрирован.
-				</span>*/}
+				<span className="register__error">
+					{isServerError}
+				</span>
 				<SubmitButton
 					title="Зарегистрироваться"
 					isFormValid={isFormValid}

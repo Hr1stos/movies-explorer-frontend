@@ -1,19 +1,16 @@
 import './Login.css';
-import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import PageWithForm from '../PageWithForm';
 import { useFormValidator } from "../../../hooks/useFormValidator";
 
-const Login = ({ setLoggedIn }) => {
-	const { values, errors, isFormValid, handleChange } = useFormValidator();
+const Login = ({ onLogin, isServerError, isDisabledInput }) => {
+	const { values, errors, isFormValid, handleChange, resetForm } = useFormValidator();
 
-	const navigate = useNavigate();
-	
 	const onSubmit = (evt) => {
 		evt.preventDefault();
-		setLoggedIn(true);
-		navigate('/movies', { replace: true });
+		onLogin(values.email, values.password);
+		resetForm()
 	};
 
 	return (
@@ -24,6 +21,7 @@ const Login = ({ setLoggedIn }) => {
 				question="Ещё не зарегистрированы?"
 				link="/signup"
 				linkTitle="Регистрация"
+				onLogin={onLogin}
 				onSubmit={onSubmit}
 			>
 				<div className="login">
@@ -32,6 +30,7 @@ const Login = ({ setLoggedIn }) => {
 						type="email"
 						title="E-mail"
 						value={values.email || ''}
+						pattern="^\S+@\S+\.\S+$"
 						onChange={handleChange}
 						required={true}
 						validationMessage={errors.email}
@@ -40,6 +39,7 @@ const Login = ({ setLoggedIn }) => {
 						className='input_type_login'
 						inputClassName="input_type_login"
 						errorClassName="input__error_type_login"
+						disabled={isDisabledInput}
 					/>
 					<Input
 						name="password"
@@ -54,11 +54,12 @@ const Login = ({ setLoggedIn }) => {
 						placeholder="Введите пароль"
 						inputClassName="input_type_login"
 						errorClassName="input__error_type_login"
+						disabled={isDisabledInput}
 					/>
 				</div>
-				{/*<span className="login__error">
-					Вы ввели неправильный логин или пароль.
-				</span>*/}
+				<span className="login__error">
+					{isServerError}
+				</span>
 				<SubmitButton
 					title="Войти"
 					isFormValid={isFormValid}

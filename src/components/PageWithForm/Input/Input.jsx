@@ -6,6 +6,7 @@ const Input = ({
 	validationMessage,
 	type,
 	value,
+	pattern,
 	placeholder,
 	onChange,
 	minLength,
@@ -24,6 +25,7 @@ const Input = ({
 				name={name}
 				id={name}
 				value={value}
+				pattern={pattern}
 				placeholder={placeholder}
 				onChange={onChange}
 				minLength={minLength}
