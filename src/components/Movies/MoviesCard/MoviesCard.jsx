@@ -1,23 +1,16 @@
 import './MoviesCard.css';
-import { useState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const MoviesCard = ({ movie, isSavedFilms, onSaveMovie, onDeleteMovie, savedMovies }) => {
 	const location = useLocation().pathname;
 	const isSaved = savedMovies.some((saveMovie) => saveMovie.movieId === movie.id);
-	const [isLiked, setIsLiked] = useState(isSaved);
-
-	useEffect(() => {
-		setIsLiked(isSaved)
-	}, [isSaved])
 
 	const handleSaveMovie = () => {
-		if (isLiked) {
+		if (isSaved) {
 			onDeleteMovie(movie);
-			setIsLiked(!isLiked)
 		} else {
 			onSaveMovie(movie);
-			setIsLiked(isLiked)
 		}
 	};
 
@@ -50,7 +43,7 @@ const MoviesCard = ({ movie, isSavedFilms, onSaveMovie, onDeleteMovie, savedMovi
 				<button
 					className={`button card__btn ${location.includes('saved') ?
 						'card__button-remove' : `card__button-like
-						${isLiked && "card__button-like_active"}
+						${isSaved && "card__button-like_active"}
 						`}
 					`}
 					type='button'
